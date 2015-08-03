@@ -1,0 +1,42 @@
+{
+  "name": "generator-es2015-module",
+  "version": "0.1.0",
+  "description": "ES2015 Module Generator",
+  "author": {
+    "name": "Ry Racherbaumer",
+    "email": "ry@rygine.com",
+    "url": "https://github.com/rygine"
+  },
+  "license": "MIT",
+  "files": [
+    "generators"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rygine/generator-es2015-module"
+  },
+  "bugs": "https://github.com/rygine/generator-es2015-module/issues",
+  "keywords": [
+    "yeoman-generator",
+    "es2015",
+    "yeoman",
+    "yo",
+    "generator",
+    "babel",
+    "eslint",
+    "tape"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^0.20.2",
+    "chalk": "^1.1.0",
+    "yosay": "^1.0.5",
+    "mkdirp": "^0.5.1",
+    "underscore.string": "^3.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^1.0.0"
+  }
+}

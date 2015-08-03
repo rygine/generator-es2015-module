@@ -1,0 +1,11 @@
+{
+  "extends": "eslint:recommended",
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "rules": {
+    // Legacy
+    "max-len": [2, 80, 2]
+  }
+}
