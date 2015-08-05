@@ -6,17 +6,22 @@ var chalk = require('chalk');
 var mkdirp = require('mkdirp');
 var _ = require('underscore.string');
 
-var ES2015ModuleGenerator = yeoman.generators.Base.extend({
+var ES2015ModuleAppGenerator = yeoman.generators.Base.extend({
 
-  init: function () {
-    this.pkg = this.fs.readJSON(path.join(__dirname, '../package.json'));
+  constructor: function () {
+    yeoman.generators.Base.apply(this, arguments);
+    this.option('skip-test', {
+      desc: 'Do not create a unit test file for the module',
+      type: Boolean,
+      defaults: false
+    });
   },
 
   prompting: function () {
     var done = this.async();
 
     this.log(yosay(
-      'Welcome to the ' + chalk.red('ES2015 Module') + ' generator!'
+      'Welcome to the ' + chalk.red('ES2015 Module') + ' project generator!'
     ));
 
     this.module = path.basename(process.cwd());
@@ -41,7 +46,7 @@ var ES2015ModuleGenerator = yeoman.generators.Base.extend({
       },
       {
         name: 'license',
-        message: 'What license would you like to use?',
+        message: 'What license (SPDX) would you like to use?',
         default: 'MIT'
       }
     ];
@@ -113,11 +118,13 @@ var ES2015ModuleGenerator = yeoman.generators.Base.extend({
         this.templatePath('test/harness.js'),
         this.destinationPath('test/harness.js')
       );
-      this.fs.copyTpl(
-        this.templatePath('test/test.js'),
-        this.destinationPath('test/' + this.props.module + '-test.js'),
-        this.props
-      );
+      if (!this.options['skip-test']) {
+        this.fs.copyTpl(
+          this.templatePath('test/test.js'),
+          this.destinationPath('test/' + this.props.module + '-test.js'),
+          this.props
+        );
+      }
     }
 
   },
@@ -130,4 +137,4 @@ var ES2015ModuleGenerator = yeoman.generators.Base.extend({
 
 });
 
-module.exports = ES2015ModuleGenerator;
+module.exports = ES2015ModuleAppGenerator;

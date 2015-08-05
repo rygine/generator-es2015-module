@@ -1,6 +1,4 @@
-/**
- * Copyright (c) <%= year %>, <%= author %> <<%= email %>>
- */
+<%= copyright %>
 
 export default {
 

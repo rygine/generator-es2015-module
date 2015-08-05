@@ -3,20 +3,29 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
-var mkdirp = require('mkdirp');
-var _ = require('underscore.string');
+var _s = require('underscore.string');
+var _ = require('lodash');
 
-var ES2015ModuleGenerator = yeoman.generators.Base.extend({
+var ES2015ModuleModuleGenerator = yeoman.generators.Base.extend({
 
-  init: function () {
-    this.pkg = this.fs.readJSON(path.join(__dirname, '../package.json'));
+  constructor: function () {
+    yeoman.generators.Base.apply(this, arguments);
+    this.option('skip-test', {
+      desc: 'Do not create a unit test file for the module',
+      type: Boolean,
+      defaults: false
+    });
+  },
+
+  initializing: function () {
+    this.pkg = this.fs.readJSON(path.join(process.cwd(), './package.json'));
   },
 
   prompting: function () {
     var done = this.async();
 
     this.log(yosay(
-      'Welcome to the ' + chalk.red('ES2015 Module') + ' generator!'
+      'Welcome to the ' + chalk.red('ES2015 Module') + ' module generator!'
     ));
 
     this.module = path.basename(process.cwd());
@@ -26,28 +35,22 @@ var ES2015ModuleGenerator = yeoman.generators.Base.extend({
         name: 'module',
         message: 'What would you like to call your module?',
         default: this.module
-      },
-      {
-        name: 'author',
-        message: 'What is your name?'
-      },
-      {
-        name: 'email',
-        message: 'What is your email?'
       }
     ];
 
     this.prompt(prompts, function(props) {
+      var author;
       this.props = props;
-      this.props.module = _.slugify(props.module || this.module);
-      this.props.year = new Date().getFullYear();
-      this.appRoot = path.basename(process.cwd()) === this.props.module ?
-        this.destinationRoot() :
-        path.join(this.destinationRoot(), this.props.module);
-      if (process.cwd() !== this.appRoot) {
-        mkdirp(this.appRoot);
-        process.chdir(this.appRoot);
+      this.props.module = _s.slugify(props.module || this.module);
+      var year = new Date().getFullYear();
+      if (this.pkg && _.isPlainObject(this.pkg.author)) {
+        author = this.pkg.author.name;
       }
+      this.props.copyright = author ? [
+        '/**',
+        ' * Copyright (c) ' + year + ', ' + author,
+        ' */'
+      ].join('\n') : '';
       done();
     }.bind(this));
   },
@@ -60,15 +63,17 @@ var ES2015ModuleGenerator = yeoman.generators.Base.extend({
         this.destinationPath('src/' + this.props.module + '.js'),
         this.props
       );
-      this.fs.copyTpl(
-        this.templatePath('test.js'),
-        this.destinationPath('test/' + this.props.module + '-test.js'),
-        this.props
-      );
+      if (!this.options['skip-test']) {
+        this.fs.copyTpl(
+          this.templatePath('test.js'),
+          this.destinationPath('test/' + this.props.module + '-test.js'),
+          this.props
+        );
+      }
     }
 
   }
 
 });
 
-module.exports = ES2015ModuleGenerator;
+module.exports = ES2015ModuleModuleGenerator;
