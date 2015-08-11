@@ -1,3 +1,9 @@
+# 0.2.1
+
+* Updated README
+* Updated package description
+* Updated ESLint: 1.0.0 => 1.1.0
+
 # 0.2.0
 
 * Added option to skip unit test creation

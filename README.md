@@ -1,6 +1,6 @@
-# ES2015 Module Generator
+# Yeoman Generator for ES2015 Modules
 
-Initial version of ES2015 Module Generator using Babel and Tape.
+Generate ES2015 modules using Babel and Tape.
 
 ## Install
 `npm install -g generator-es2015-module`

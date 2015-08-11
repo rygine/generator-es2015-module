@@ -1,7 +1,7 @@
 {
   "name": "generator-es2015-module",
-  "version": "0.2.0",
-  "description": "ES2015 Module Generator",
+  "version": "0.2.1",
+  "description": "Yeoman generator for ES2015 modules",
   "author": {
     "name": "Ry Racherbaumer",
     "email": "ry@rygine.com",
@@ -38,6 +38,6 @@
     "lodash": "^3.10.1"
   },
   "devDependencies": {
-    "eslint": "^1.0.0"
+    "eslint": "^1.1.0"
   }
 }
