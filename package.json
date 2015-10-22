@@ -1,6 +1,6 @@
 {
   "name": "generator-es2015-module",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Yeoman generator for ES2015 modules",
   "author": {
     "name": "Ry Racherbaumer",
@@ -30,14 +30,14 @@
     "tape"
   ],
   "dependencies": {
-    "yeoman-generator": "^0.20.2",
-    "chalk": "^1.1.0",
+    "yeoman-generator": "^0.21.1",
+    "chalk": "^1.1.1",
     "yosay": "^1.0.5",
     "mkdirp": "^0.5.1",
-    "underscore.string": "^3.1.1",
+    "underscore.string": "^3.2.2",
     "lodash": "^3.10.1"
   },
   "devDependencies": {
-    "eslint": "^1.1.0"
+    "eslint": "^1.7.3"
   }
 }
